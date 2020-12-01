@@ -1,0 +1,3 @@
+ALTER TABLE account
+    ALTER COLUMN id VARCHAR(8);
+GO
