@@ -1,9 +1,9 @@
 #!/usr/bin/env pwsh
 
-docker build -t bct-flyway-base -f .\src\Dockerfile .
+docker build -t flyway-base -f .\src\Dockerfile .
 docker build -t example-migration -f .\test\Dockerfile .
 
-Push-Location -Path "./dev-tools"
+Push-Location -Path "./devtools"
     docker-compose up -d
 Pop-Location
 
@@ -14,11 +14,11 @@ function Run-Action($DBType, $Action)
 
     switch($DBType) {
     "SQLServer" {
-        docker run --network=dev-tools_default example-migration --type $DBType --action $Action --server sql-server-db --port 1433 --database "mssql-db" --username "sa" --password "c3kgC5#Adfl*"
+        docker run --network=devtools_default example-migration --type $DBType --action $Action --server sql-server-db --port 1433 --database "mssql-db" --username "sa" --password "c3kgC5#Adfl*"
         break
     }
     "PostgreSQL" {
-        docker run --network=dev-tools_default example-migration --type $DBType --action $Action --server postgres-db --port 5432 --database "psql-db" --username "devtools_user" --password "DevTools1!"
+        docker run --network=devtools_default example-migration --type $DBType --action $Action --server postgres --port 5432 --database "psql-db" --username "user" --password "pass"
         break
     }
     default { 
