@@ -1,4 +1,4 @@
-FROM flyway/flyway:6.2.4
+FROM flyway/flyway:latest
 
 WORKDIR /scripts
 
